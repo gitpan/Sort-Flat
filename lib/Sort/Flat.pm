@@ -1,56 +1,19 @@
-# $Id: Flat.pm,v 0.04 2004/01/17 15:30:09 sts Exp $
+# $Id: Flat.pm,v 0.05 2004/01/18 22:15:36 sts Exp $
 
 package Sort::Flat;
 
+use base(Exporter);
 use strict 'vars';
 use warnings;
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
-our (%import_ok, %imported, $cmp);
+our @EXPORT_OK = qw(sort_f reverse_f);
 
-sub import {
-    shift;
-    if (@_ == 0) {
-        require Carp;
-	Carp::croak __PACKAGE__, q~ requires arguments~;
-    }
-    
-    $import_ok{sort_f}    = '';
-    $import_ok{reverse_f} = '';
-    
-    my $caller = caller(0);
-    while ($_ = shift) {
-        if (defined $import_ok{$_}) {
-            *{$caller."::$_"} = \&{_.$_};
-	    $imported{$_} = '';
-        }
-    	else {
-            require Carp;
-	    Carp::croak qq~Unknown import_ok $_~;
-    	}
-    }   
-}
+our $cmp;
 
-sub unimport {
-    shift;
-    
-    @_ = @_ ? @_ : keys %imported;
-    
-    my $caller = caller(0);
-    foreach (@_) {
-        if (defined $imported{$_}) { 
-	    delete ${$caller.'::'}{$_}; 
-	}
-	else { 
-	    require Carp; 
-	    Carp::croak qq~Couldn't unimport $_~; 
-        }
-    } 
-}
-
-sub _sort_f { local $cmp = '+'; &_sort_flat; }
-sub _reverse_f { &_sort_flat }
+sub sort_f { local $cmp = '+'; &_sort_flat; }
+sub reverse_f { &_sort_flat }
 
 sub _sort_flat {
     no warnings;
@@ -84,14 +47,14 @@ Sort::Flat - a case-insensitive sort.
 
 C<Sort::Flat> implements case-insensitive sorting by lowercasering 
 items within an array each time an array has to be sorted; 
-C<sort_f & reverse_f> are shortcuts to perl's built-in function C<sort>.
+C<sort_f & reverse_f> are shortcuts to perl's C<sort>.
 
 C<sort_f> is equivalent to using C<sort {lc($a) cmp lc($b)}>,
 while C<reverse_f> is equivalent to using C<sort {lc($b) cmp lc($a)}>.
 
 =head1 EXPORT
 
-Typeglobs C<sort_f & reverse_f> upon request.
+C<sort_f & reverse_f> upon request.
 
 =cut
 
