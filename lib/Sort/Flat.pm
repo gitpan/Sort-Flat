@@ -1,13 +1,13 @@
-# $Id: Flat.pm,v 0.03 2004/01/17 15:30:09 sts Exp $
+# $Id: Flat.pm,v 0.04 2004/01/17 15:30:09 sts Exp $
 
 package Sort::Flat;
 
 use strict 'vars';
 use warnings;
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
-our (%export_ok, %exported, $cmp);
+our (%import_ok, %imported, $cmp);
 
 sub import {
     shift;
@@ -16,18 +16,18 @@ sub import {
 	Carp::croak __PACKAGE__, q~ requires arguments~;
     }
     
-    $export_ok{sort_f}    = '';
-    $export_ok{reverse_f} = '';
+    $import_ok{sort_f}    = '';
+    $import_ok{reverse_f} = '';
     
     my $caller = caller(0);
-    while ($_ = shift @_) {
-        if (defined $export_ok{$_}) {
+    while ($_ = shift) {
+        if (defined $import_ok{$_}) {
             *{$caller."::$_"} = \&{_.$_};
-	    $exported{$_} = '';
+	    $imported{$_} = '';
         }
     	else {
             require Carp;
-	    Carp::croak qq~Unknown import $_~;
+	    Carp::croak qq~Unknown import_ok $_~;
     	}
     }   
 }
@@ -35,11 +35,11 @@ sub import {
 sub unimport {
     shift;
     
-    @_ = @_ ? @_ : keys %exported;
+    @_ = @_ ? @_ : keys %imported;
     
     my $caller = caller(0);
     foreach (@_) {
-        if (defined $exported{$_}) { 
+        if (defined $imported{$_}) { 
 	    delete ${$caller.'::'}{$_}; 
 	}
 	else { 
