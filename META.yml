@@ -1,0 +1,10 @@
+--- #YAML:1.0
+module_name: Sort-Flat
+dist_version_from: lib/Sort/Flat.pm
+installdirs: site
+requires:
+    Exporter: 0 
+distribution_type: module
+license: perl
+dist_abstract: a case-insensitive sort.
+dist_author: Steven Schubiger

@@ -1,0 +1,8 @@
+bin/sort.pl
+CHANGES
+lib/Sort/Flat.pm
+Makefile.PL
+MANIFEST			This list of files
+META.yml
+README
+t/Sort-Flat.t
