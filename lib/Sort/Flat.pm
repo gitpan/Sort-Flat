@@ -1,12 +1,12 @@
-# $Id: Flat.pm,v 0.05 2004/01/18 22:15:36 sts Exp $
+# $Id: Flat.pm,v 0.06 2004/01/18 22:15:36 sts Exp $
 
 package Sort::Flat;
 
-use base(Exporter);
+use base qw(Exporter);
 use strict 'vars';
 use warnings;
 
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 our @EXPORT_OK = qw(sort_f reverse_f);
 
@@ -37,11 +37,6 @@ Sort::Flat - a case-insensitive sort.
 
  @arr2 = sort_f @arr1;
  @arr2 = reverse_f @arr1;
-
- no Sort::Flat 'sort_f';
-
- # will trigger an error
- @arr2 = sort_f @arr1;
 
 =head1 DESCRIPTION
 
