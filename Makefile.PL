@@ -1,5 +1,4 @@
 use ExtUtils::MakeMaker;
-
 WriteMakefile(
     DISTNAME     => 'Sort-Flat',
     NAME         => 'Sort::Flat',
