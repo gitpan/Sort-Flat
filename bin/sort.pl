@@ -3,18 +3,18 @@
 use strict;
 use warnings;
 
-use Sort::Flat qw(sortf reversef);
+use Sort::Flat;
 
-my (@arr, @sortf, @reversef, $i);
+my (@arr, @sort, @reverse, $i);
 
 @arr = qw(ABC def JKL ghi PQRS mno);
 
-@sortf = sortf @arr;
-@reversef = reversef @arr;
+@sort = sort @arr;
+@reverse = reverse @arr;
 
 format =
 @<<<< @<<<< 
-$sortf[$i], $reversef[$i]
+$sort[$i], $reverse[$i]
 .
 
 for ($i = 0; $i < @arr; $i++) { write }

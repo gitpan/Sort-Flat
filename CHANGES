@@ -1,5 +1,8 @@
 Revision history for Perl extension Sort::Flat.
 
+0.13 2004/01/22
+ - source is filtered.
+
 0.1 2004/01/18
  - subs are called via AUTOLOAD.
 

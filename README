@@ -16,7 +16,7 @@ SCRIPTS
 
 bin/sort.pl
 
-Interface to Sort::Flat that contains predefined options.
+Interface to Sort::Flat that sorts case-insensitive.
 
 LICENSE
 
