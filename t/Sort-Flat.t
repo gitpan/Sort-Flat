@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 3;
+use Test::More tests => 2;
 
 use Sort::Flat;
 
@@ -14,4 +14,3 @@ BEGIN {
 
 my @arr = qw(ABC def JKL ghi PQRS mno);
 is((join '', sort @arr), 'ABCdefghiJKLmnoPQRS', 'sort @arr;');
-is((join '', reverse @arr), 'PQRSmnoJKLghidefABC', 'reverse @arr;');

@@ -1,4 +1,4 @@
-# $Id: Flat.pm,v 0.14 2004/01/22 22:13:26 sts Exp $
+# $Id: Flat.pm,v 0.15 2004/01/23 16:54:28 sts Exp $
 
 package Sort::Flat;
 
@@ -6,16 +6,17 @@ use 5.006;
 use strict;
 use warnings;
 
-our $VERSION = '0.14';
+our $VERSION = '0.15';
 
 use Filter::Simple;
 
 FILTER_ONLY
-    executable => sub { 
-        s#\s+sort\s+#sort {lc(\$a) cmp lc(\$b)}#g 
-	  if m#\s+sort\s+#;
-	s#\s+reverse\s+#sort {lc(\$b) cmp lc(\$a)}#g 
-	  if m#\s+reverse\s+#;
+    code => sub { 
+        my ($stub) = /sort\s+(\w+)/;
+	no warnings;
+        unless (/sub\s+$stub/ || /sort\s+(?:\{|=)/) {
+          s#sort#sort {lc(\$a) cmp lc(\$b)}#g
+	}
     };
     
 1;
@@ -32,14 +33,12 @@ Sort::Flat - a case-insensitive sort.
  @arr1 = qw(ABC def JKL ghi PQRS mno);
 
  @arr2 = sort @arr1;
- @arr2 = reverse @arr1;
  
  no Sort::Flat;         # case-sensitive
 
 =head1 DESCRIPTION
 
-C<Sort::Flat> filters the source for C<sort> and C<reverse>
-at compile time and replaces them with their case-insensitive 
-equivalents.
+C<Sort::Flat> filters the source for C<sort> at compile time 
+and replaces it with its case-insensitive equivalent.
 
 =cut
