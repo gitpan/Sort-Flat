@@ -1,4 +1,4 @@
-# $Id: Flat.pm,v 0.08 2004/01/19 07:48:36 sts Exp $
+# $Id: Flat.pm,v 0.1 2004/01/19 17:04:43 sts Exp $
 
 package Sort::Flat;
 
@@ -6,14 +6,18 @@ use base qw(Exporter);
 use strict 'vars';
 use warnings;
 
-our $VERSION = '0.08';
+our $VERSION = '0.1';
 
 our @EXPORT_OK = qw(sortf reversef);
 
-our $cmp;
+our ($AUTOLOAD, $cmp);
 
-sub sortf { local $cmp = '+'; &_sort_flat; }
-sub reversef { &_sort_flat }
+AUTOLOAD {
+    local $cmp; 
+    my ($sub) = $AUTOLOAD =~ /.*:(.*)/;    
+    if ($sub eq 'sortf') { $cmp = '+' }
+    &_sort_flat;
+}
 
 sub _sort_flat {
     no warnings;
@@ -49,21 +53,6 @@ while C<reversef> is equivalent to using C<sort {lc($b) cmp lc($a)}>.
 
 =head1 EXPORT
 
-C<sortf & reversef> upon request.
-
-=cut
-
-=head1 SEE ALSO
-
-perl(1)
-
-=head1 LICENSE
-
-This program is free software; 
-you may redistribute it and/or modify it under the same terms as Perl itself.
-
-=head1 AUTHOR
-
-Steven Schubiger
+C<sortf & reversef> are exportable.
 
 =cut

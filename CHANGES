@@ -1,5 +1,8 @@
 Revision history for Perl extension Sort::Flat.
 
+0.1 2004/01/18
+ - subs are called via AUTOLOAD.
+
 0.05 2004/01/18
  - Exporter is being used.
 
