@@ -3,13 +3,20 @@
 use strict;
 use warnings;
 
-use Sort::Flat qw(sort_f reverse_f);
+use Sort::Flat qw(sortf reversef);
 
-local $, = "\n";
+$" = ' ';
 
-my @arr = qw(ABC def JKL ghi PQRS mno);
+my (@arr, @sortf, @reversef, $i);
 
-print sort_f @arr;
-print "\n\n";
-print reverse_f @arr;
-print "\n";
+@arr = qw(ABC def JKL ghi PQRS mno);
+
+@sortf = sortf @arr;
+@reversef = reversef @arr;
+
+format =
+@<<<< @<<<< 
+$sortf[$i], $reversef[$i]
+.
+
+for ($i = 0; $i < @arr; $i++) { write }

@@ -5,14 +5,14 @@ use warnings;
 
 use Test::More tests => 3;
 
-use Sort::Flat qw(sort_f reverse_f);
+use Sort::Flat qw(sortf reversef);
 
-ok (1, 'use Sort::Flat;');
+ok(1, 'use Sort::Flat;');
 
-my (@arr, $sort_f, $reverse_f);
+my (@arr, $sortf, $reversef);
 @arr = qw(ABC def JKL ghi PQRS mno);
-$sort_f = join '', sort_f @arr;
-$reverse_f = join '', reverse_f @arr;
+$sortf = join '', sortf @arr;
+$reversef = join '', reversef @arr;
 
-is($sort_f, 'ABCdefghiJKLmnoPQRS', 'sort_f @array;');
-is ($reverse_f, 'PQRSmnoJKLghidefABC', 'reverse_f @array;');
+is($sortf, 'ABCdefghiJKLmnoPQRS', 'sortf @array;');
+is($reversef, 'PQRSmnoJKLghidefABC', 'reversef @array;');

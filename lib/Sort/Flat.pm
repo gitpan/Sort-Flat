@@ -1,4 +1,4 @@
-# $Id: Flat.pm,v 0.06 2004/01/18 22:15:36 sts Exp $
+# $Id: Flat.pm,v 0.07 2004/01/19 07:48:36 sts Exp $
 
 package Sort::Flat;
 
@@ -6,14 +6,14 @@ use base qw(Exporter);
 use strict 'vars';
 use warnings;
 
-our $VERSION = '0.06';
+our $VERSION = '0.07';
 
-our @EXPORT_OK = qw(sort_f reverse_f);
+our @EXPORT_OK = qw(sortf reversef);
 
 our $cmp;
 
-sub sort_f { local $cmp = '+'; &_sort_flat; }
-sub reverse_f { &_sort_flat }
+sub sortf { local $cmp = '+'; &_sort_flat; }
+sub reversef { &_sort_flat }
 
 sub _sort_flat {
     no warnings;
@@ -31,25 +31,25 @@ Sort::Flat - a case-insensitive sort.
 
 =head1 SYNOPSIS
 
- use Sort::Flat qw(sort_f reverse_f);
+ use Sort::Flat qw(sortf reversef);
 
  @arr1 = qw(ABC def JKL ghi PQRS mno);
 
- @arr2 = sort_f @arr1;
- @arr2 = reverse_f @arr1;
+ @arr2 = sortf @arr1;
+ @arr2 = reversef @arr1;
 
 =head1 DESCRIPTION
 
 C<Sort::Flat> implements case-insensitive sorting by lowercasering 
 items within an array each time an array has to be sorted; 
-C<sort_f & reverse_f> are shortcuts to perl's C<sort>.
+C<sortf & reversef> are shortcuts to perl's C<sort>.
 
-C<sort_f> is equivalent to using C<sort {lc($a) cmp lc($b)}>,
-while C<reverse_f> is equivalent to using C<sort {lc($b) cmp lc($a)}>.
+C<sortf> is equivalent to using C<sort {lc($a) cmp lc($b)}>,
+while C<reversef> is equivalent to using C<sort {lc($b) cmp lc($a)}>.
 
 =head1 EXPORT
 
-C<sort_f & reverse_f> upon request.
+C<sortf & reversef> upon request.
 
 =cut
 
