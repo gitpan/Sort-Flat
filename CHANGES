@@ -1,4 +1,7 @@
 Revision history for Perl extension Sort::Flat.
 
+0.02 2004/01/17
+ - unimport() destroys all typeglobs.
+
 0.01 2004/01/16
  - initial version.
