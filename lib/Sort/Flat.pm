@@ -1,20 +1,21 @@
-# $Id: Flat.pm,v 0.13 2004/01/22 22:13:26 sts Exp $
+# $Id: Flat.pm,v 0.14 2004/01/22 22:13:26 sts Exp $
 
 package Sort::Flat;
 
 use 5.006;
-use base qw(Exporter);
 use strict;
 use warnings;
 
-our $VERSION = '0.13';
+our $VERSION = '0.14';
 
 use Filter::Simple;
 
 FILTER_ONLY
     executable => sub { 
-        s#\s+sort\s+#sort {lc(\$a) cmp lc(\$b)}#g if m#\s+sort\s+#;
-	s#\s+reverse\s+#sort {lc(\$b) cmp lc(\$a)}#g if m#\s+reverse\s+#;
+        s#\s+sort\s+#sort {lc(\$a) cmp lc(\$b)}#g 
+	  if m#\s+sort\s+#;
+	s#\s+reverse\s+#sort {lc(\$b) cmp lc(\$a)}#g 
+	  if m#\s+reverse\s+#;
     };
     
 1;

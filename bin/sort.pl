@@ -6,7 +6,6 @@ use warnings;
 use Sort::Flat;
 
 my (@arr, @sort, @reverse, $i);
-
 @arr = qw(ABC def JKL ghi PQRS mno);
 
 @sort = sort @arr;
