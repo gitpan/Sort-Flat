@@ -5,7 +5,7 @@ use warnings;
 
 use Test::More tests => 3;
 
-use Sort::Flat qw/sort_f reverse_f/;
+use Sort::Flat qw(sort_f reverse_f);
 
 ok (1, 'use Sort::Flat;');
 

@@ -1,13 +1,13 @@
-# $Id: Flat.pm,v 0.02 2004/01/16 22:53:40 sts Exp $
+# $Id: Flat.pm,v 0.03 2004/01/17 15:30:09 sts Exp $
 
 package Sort::Flat;
 
 use strict 'vars';
 use warnings;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
-our ($cmp, @exported);
+our (%export_ok, %exported, $cmp);
 
 sub import {
     shift;
@@ -16,16 +16,15 @@ sub import {
 	Carp::croak __PACKAGE__, q~ requires arguments~;
     }
     
+    $export_ok{sort_f}    = '';
+    $export_ok{reverse_f} = '';
+    
     my $caller = caller(0);
     while ($_ = shift @_) {
-        if ($_ eq 'sort_f') {
-            *{$caller."::$_"} = \&{_."$_"};
-	    push @exported, $_;
+        if (defined $export_ok{$_}) {
+            *{$caller."::$_"} = \&{_.$_};
+	    $exported{$_} = '';
         }
-   	elsif ($_ eq 'reverse_f') {
-            *{$caller."::$_"} = \&{_."$_"};
-	    push @exported, $_;
-    	}
     	else {
             require Carp;
 	    Carp::croak qq~Unknown import $_~;
@@ -36,12 +35,18 @@ sub import {
 sub unimport {
     shift;
     
-    my $caller = caller(0); 
-    my @rm = @_ ? @_ : @exported;
-   
-    foreach (@rm) { 
-        delete ${$caller.'::'}{$_}; 
-    }
+    @_ = @_ ? @_ : keys %exported;
+    
+    my $caller = caller(0);
+    foreach (@_) {
+        if (defined $exported{$_}) { 
+	    delete ${$caller.'::'}{$_}; 
+	}
+	else { 
+	    require Carp; 
+	    Carp::croak qq~Couldn't unimport $_~; 
+        }
+    } 
 }
 
 sub _sort_f { local $cmp = '+'; &_sort_flat; }
@@ -49,11 +54,9 @@ sub _reverse_f { &_sort_flat }
 
 sub _sort_flat {
     no warnings;
-    @_ = $cmp eq '+'
+    return $cmp eq '+'
       ? sort {lc($a) cmp lc($b)} @_
       : sort {lc($b) cmp lc($a)} @_;
-
-    return @_;
 }
 
 1;
@@ -65,7 +68,7 @@ Sort::Flat - a case-insensitive sort.
 
 =head1 SYNOPSIS
 
- use Sort::Flat qw/sort_f reverse_f/;
+ use Sort::Flat qw(sort_f reverse_f);
 
  @arr1 = qw(ABC def JKL ghi PQRS mno);
 
