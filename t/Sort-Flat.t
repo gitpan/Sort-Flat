@@ -1,11 +1,10 @@
-#!/usr/bin/perl
+#! /usr/local/bin/perl
 
 use strict;
 use warnings;
+use Sort::Flat;
 
 use Test::More tests => 2;
-
-use Sort::Flat;
 
 BEGIN {
     my $PACKAGE = 'Sort::Flat';

@@ -1,14 +1,14 @@
 package Sort::Flat;
 
-$VERSION = '0.17';
+$VERSION = '0.18';
 
 use strict;
 use Filter::Simple;
 
 FILTER_ONLY
     code => sub { 
-        my ($stub) = m#sort\s+(\w+)#; $stub ||= '';
-        unless (m#sub\s+$stub# || m#sort\s+(?:\{|=)#) {
+        my($stub) = m#sort \s+ (\w+)#ox;
+        unless (m#sub \s+ $stub#ox || m#sort \s+ (?: \{ | =)#ox) {
             s#sort#sort { lc(\$a) cmp lc(\$b) }#g
 	}
     };
@@ -32,7 +32,7 @@ Within some code:
 
 From the command-line:
 
- perl -MSort::Flat ./script.pl
+ perl -MSort::Flat ./sort.pl
 
 =head1 DESCRIPTION
 

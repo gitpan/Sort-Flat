@@ -7,4 +7,3 @@ requires:
 distribution_type: module
 license: perl
 dist_abstract: Case-insensitive sort
-dist_author: Steven Schubiger

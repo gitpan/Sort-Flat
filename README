@@ -1,7 +1,7 @@
 Sort::Flat
 ==========
 
-A case-insensitive sort.
+Case-insensitive sort
 
 INSTALLATION
 
@@ -16,7 +16,7 @@ SCRIPTS
 
 bin/sort.pl
 
-Interface to Sort::Flat that sorts case-insensitive.
+Outputs case-insensitive sorted items.
 
 LICENSE
 

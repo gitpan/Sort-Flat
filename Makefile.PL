@@ -5,7 +5,7 @@ WriteMakefile(
     VERSION_FROM => 'lib/Sort/Flat.pm',
     PREREQ_PM    => { Filter::Simple => 0 },
     'dist'       => { COMPRESS => 'gzip', SUFFIX => 'gz' },
-    ($] >= 5.005 ? 
-       (ABSTRACT_FROM => 'lib/Sort/Flat.pm',
-        AUTHOR        => 'Steven Schubiger') : ()),
+    ($] >= 5.005 
+      ? (ABSTRACT_FROM => 'lib/Sort/Flat.pm') : ()
+    ),
 );
