@@ -5,8 +5,6 @@ use warnings;
 
 use Sort::Flat qw(sortf reversef);
 
-$" = ' ';
-
 my (@arr, @sortf, @reversef, $i);
 
 @arr = qw(ABC def JKL ghi PQRS mno);

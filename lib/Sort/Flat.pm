@@ -1,4 +1,4 @@
-# $Id: Flat.pm,v 0.07 2004/01/19 07:48:36 sts Exp $
+# $Id: Flat.pm,v 0.08 2004/01/19 07:48:36 sts Exp $
 
 package Sort::Flat;
 
@@ -6,7 +6,7 @@ use base qw(Exporter);
 use strict 'vars';
 use warnings;
 
-our $VERSION = '0.07';
+our $VERSION = '0.08';
 
 our @EXPORT_OK = qw(sortf reversef);
 
