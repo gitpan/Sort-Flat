@@ -1,4 +1,4 @@
-# $Id: Flat.pm,v 0.15 2004/01/23 16:54:28 sts Exp $
+# $Id: Flat.pm,v 0.16 2004/01/23 16:54:28 sts Exp $
 
 package Sort::Flat;
 
@@ -6,7 +6,7 @@ use 5.006;
 use strict;
 use warnings;
 
-our $VERSION = '0.15';
+our $VERSION = '0.16';
 
 use Filter::Simple;
 
@@ -15,7 +15,7 @@ FILTER_ONLY
         my ($stub) = /sort\s+(\w+)/;
 	no warnings;
         unless (/sub\s+$stub/ || /sort\s+(?:\{|=)/) {
-          s#sort#sort {lc(\$a) cmp lc(\$b)}#g
+          s#sort#sort { lc(\$a) cmp lc(\$b) }#g
 	}
     };
     
